@@ -1,0 +1,35 @@
+{
+  "name": "private_blockchain_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "npx jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bitcoinjs-lib": "^6.0.1",
+    "bitcoinjs-message": "^2.2.0",
+    "body-parser": "^1.20.0",
+    "crypto-js": "^4.1.1",
+    "express": "^4.18.1",
+    "hex2ascii": "^0.0.3",
+    "level": "^8.0.0",
+    "morgan": "^1.10.0",
+    "supertest": "^6.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2"
+  }
+}
