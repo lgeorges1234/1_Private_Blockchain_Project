@@ -11,17 +11,19 @@ import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 
+import BlockchainController from "./handlers/BlockchainController.js";
+
 /**
  * Require the Blockchain class. This allow us to have only one instance of the class.
  */
-import { Blockchain } from "./blockchain";
+import { Blockchain } from "../src/models/blockchain.js";
 
-class ApplicationServer{
+export class ApplicationServer {
     constructor(){
         // Express application object
         this.app = express();
         // Blockain class object
-        this.blockchain = new Blockchain.Blockchain();
+        this.blockchain = new Blockchain();
         // Method that initialized the express framework
         this.initExpress();
         // Method that initialize middleware modules
@@ -43,7 +45,8 @@ class ApplicationServer{
     }
 
 	initControllers() {
-        require("./BlockchainController.js").default(this.app, this.blockchain);
+        // require("./BlockchainController.js").default(this.app, this.blockchain);
+        BlockchainController(this.app, this.blockchain)
 	}
 
     start(){
