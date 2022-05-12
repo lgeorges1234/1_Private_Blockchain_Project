@@ -115,17 +115,36 @@ export class Blockchain {
                     // verify the message with wallet address and signature
                     bitcoinMessage.verify(message, address, signature);
                     // create and add the block to the chain
-                    resolve(this._addBlock(data));
-                } else throw new Error('Message has exceeded the period of allowed time !')
+                    resolve(self._addBlock(data));
+                } else throw new Error('Message has exceeded the period of time !')
             } catch(error) { reject(new Error(error)); }
         });
     };
 
     getStarsByWalletAddress(address) {
         let self = this;
+        let starsArray = [];
         return new Promise((resolve, reject) => {
             try {
+                let starsByOwner = self.chain.filter(block => block.getBData().address == address);
+                for (star in starsByOwner) starsArray.push(starsByOwner.body.star);
+                if (star) resolve(star);
+                else throw new Error('No stars have been recorded through this address!')
             } catch(error) { reject(new Error(error)); }
         });
+    }
+
+    validateChain() {
+        return new Promise((resolve, reject) => {
+            try {
+                self.chain.forEach((block, index) => {
+                    if (block.validateBlock()) {
+                        if (block.previousBlockHash === self.chain[index -1].hash) {
+                            resolve(true);
+                        } else throw new Error(`block chain validity is compromised between block ${index} and block ${index + 1} !`)
+                    } else throw new Error(`block ${index + 1} is not valid!`)
+                });
+            } catch(error) { reject(new Error(error)); }
+        })
     }
 }

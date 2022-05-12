@@ -36,7 +36,6 @@ export class Block {
 
     getBData() {
         let self = this;
-        const star = JSON.parse(hex2ascii(self.body));
-        return star;
+        return JSON.parse(hex2ascii(self.body));
     }
 }
