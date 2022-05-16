@@ -1,6 +1,6 @@
 # Private Blockchain Project
 
-This project is an implementation of a basic blockchain in nodeJS. It represents a test of concept on how a Blockchain application can be used to register stars and keeping ownership of the different additions.
+This project is an implementation of a basic blockchain in Node.js. It represents a test of concept on how a Blockchain application can be used to register stars and keeping ownership of the different additions.
 
 
 ## Table of contents
@@ -15,9 +15,9 @@ This project is an implementation of a basic blockchain in nodeJS. It represents
 
 ## General info
 
-1. The application will create a Genesis Block when we run the application.
-2. The user will request the application to send a message to be signed using a Wallet and in this way verify the ownership over the wallet address. The message format will be: `<WALLET_ADRESS>:${new Date().getTime().toString().slice(0,-3)}:starRegistry`;
-3. Once the user have the message the user can use a Wallet to sign the message.
+1. The application will create a Genesis Block when we the application is running.
+2. The user will request the application to send a message to be signed using a Wallet and in this way verify the ownership over the wallet address. The message format is: `<WALLET_ADRESS>:${new Date().getTime().toString().slice(0,-3)}:starRegistry`;
+3. Once the user have the message, the user can use a Wallet to sign the message.
 4. The user will try to submit the Star object for that it will submit: `wallet address`, `message`, `signature` and the `star` object with the star information.
     The Start information will be formed in this format:
     ```json
@@ -27,8 +27,8 @@ This project is an implementation of a basic blockchain in nodeJS. It represents
             "story": "Testing the story 4"
 		}
     ```
-5. The application will verify if the time elapsed from the request ownership (the time is contained in the message) and the time when you submit the star is less than 5 minutes.
-6. If everything is okay the star information will be stored in the block and added to the `chain`
+5. The application verify if the time elapsed from the request ownership (the time is contained in the message) and the time when you submit the star is less than 5 minutes.
+6. If everything is okay the star information is stored in the block and added to the `chain`
 7. The application will allow us to retrieve the Star objects belong to an owner (wallet address).
 ---
 
@@ -38,11 +38,11 @@ This application has been created using Node.js and javascript programming langu
 Some of the libraries or npm modules used:
 * "bitcoinjs-lib": "^4.0.3",
 * "bitcoinjs-message": "^2.0.0",
-    * "body-parser": "^1.18.3",
-    * "crypto-js": "^3.1.9-1",
-    * "express": "^4.16.4",
-    * "hex2ascii": "0.0.3",
-    * "morgan": "^1.9.1"
+* "body-parser": "^1.18.3",
+* "crypto-js": "^3.1.9-1",
+* "express": "^4.16.4",
+* "hex2ascii": "0.0.3",
+* "morgan": "^1.9.1"
 
 ### Libraries purpose:
 
