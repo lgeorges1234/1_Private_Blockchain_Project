@@ -19,6 +19,7 @@
     "hex2ascii": "^0.0.3",
     "level": "^8.0.0",
     "morgan": "^1.10.0",
+    "request": "^2.88.2",
     "supertest": "^6.2.3"
   },
   "devDependencies": {

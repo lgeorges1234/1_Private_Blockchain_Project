@@ -1,5 +1,6 @@
 import pkg from "crypto-js";
 const { SHA256 } = pkg;
+import bitcoinMessage from "bitcoinjs-message";
 
 import { Block } from "./block.js";
 import { getCurrentTimeStamp } from "../utils/functions.js";
@@ -26,12 +27,16 @@ export class Blockchain {
 
     // create the first block of the chainblock
     async createGenesisBlock() {
-        await this._addBlock(new Block({
-            "name": "First Block in the Chain - Genesis Block",
-            "dec": "0° 0' 0",
-            "ra": "0h 0m 0s",
-            "story": "Everything starts now!"
-        }))
+        const data = {
+            "star": {        
+                "name": "First Block in the Chain - Genesis Block",
+                "dec": "0D 0' 0",
+                "ra": "0h 0m 0s",
+                "story": "Everything starts now!"
+                }, 
+            "owner": 'adminAddress'
+        };
+        await this._addBlock(new Block(data));
     }
 
     // add a new block to the blockchain
@@ -102,8 +107,9 @@ export class Blockchain {
     }
 
     submitStar(address, message, signature, star) {
+        let self = this;
         return new Promise((resolve, reject) => {
-            data = {
+            const data = {
                 "star": star, 
                 "owner": address
             };
@@ -111,11 +117,11 @@ export class Blockchain {
             const elapsedTime = Math.abs(parseInt(getCurrentTimeStamp()) - parseInt(message.split(':')[1]));
             try {
                 // check if the time elapsed is less than 5 minutes
-                if (elapsedTime > 300) {
+                if (elapsedTime < 300000) {
                     // verify the message with wallet address and signature
                     bitcoinMessage.verify(message, address, signature);
                     // create and add the block to the chain
-                    resolve(self._addBlock(data));
+                    resolve(self._addBlock(new Block(data)));
                 } else throw new Error('Message has exceeded the period of time !')
             } catch(error) { reject(new Error(error)); }
         });
@@ -123,27 +129,31 @@ export class Blockchain {
 
     getStarsByWalletAddress(address) {
         let self = this;
-        let starsArray = [];
         return new Promise((resolve, reject) => {
             try {
-                let starsByOwner = self.chain.filter(block => block.getBData().address == address);
-                for (star in starsByOwner) starsArray.push(starsByOwner.body.star);
-                if (star) resolve(star);
+                // let starsByOwner = self.chain.filter(block => console.log(`block: ${JSON.stringify(block.getBData().owner)}`));
+                let starsByOwner = self.chain.filter(block => block.getBData().owner == address).map(block => block.getBData().star);
+                if (starsByOwner) resolve(starsByOwner);
                 else throw new Error('No stars have been recorded through this address!')
             } catch(error) { reject(new Error(error)); }
         });
     }
 
     validateChain() {
+        let self = this;
         return new Promise((resolve, reject) => {
             try {
                 self.chain.forEach((block, index) => {
-                    if (block.validateBlock()) {
-                        if (block.previousBlockHash === self.chain[index -1].hash) {
-                            resolve(true);
-                        } else throw new Error(`block chain validity is compromised between block ${index} and block ${index + 1} !`)
-                    } else throw new Error(`block ${index + 1} is not valid!`)
+                    if (!block.validateBlock) throw new Error(`block ${index + 1} is not valid!`);
+                    switch (block.height) {
+                        case (1) :  return;
+                        default : {
+                            if (block.previousBlockHash !== self.chain[index -1].hash) throw new Error(`block chain validity is compromised between block ${index} and block ${index + 1} !`)
+                            else return;
+                        }
+                    }
                 });
+                resolve(true);
             } catch(error) { reject(new Error(error)); }
         })
     }

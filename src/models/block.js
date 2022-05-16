@@ -9,10 +9,10 @@ import { hex2ascii } from "hex2ascii";
 
 export class Block {
     
-    constructor(star) {
+    constructor(data) {
         this.hash = "",
         this.height = 0,
-        this.body = star,
+        this.body = Buffer.from(JSON.stringify(data)).toString('hex'),
         this.time = "",
         this.previousBlockHash = "0x"
     }
