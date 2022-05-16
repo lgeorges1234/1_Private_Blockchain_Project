@@ -111,7 +111,7 @@ It contains a constructor and the following methods:
 #### Run server
 `npm run start`
 
-#### run all Tests
+#### Run all Tests
 `npm run test`
 
 ---
