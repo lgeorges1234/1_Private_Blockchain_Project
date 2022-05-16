@@ -36,8 +36,8 @@ This project is an implementation of a basic blockchain in nodeJS. It represents
 
 This application has been created using Node.js and javascript programming language. The architecture use ES6 classes.
 Some of the libraries or npm modules used:
-    * "bitcoinjs-lib": "^4.0.3",
-    * "bitcoinjs-message": "^2.0.0",
+* "bitcoinjs-lib": "^4.0.3",
+* "bitcoinjs-message": "^2.0.0",
     * "body-parser": "^1.18.3",
     * "crypto-js": "^3.1.9-1",
     * "express": "^4.16.4",
@@ -68,7 +68,7 @@ It contains the routes of the REST Api. Those are the methods that expose the ur
 
 #### Block class
 
-This class will allow to implemente instamces of a block. 
+This class will allow to implemente instance of a block. 
 
 It contains a constructor and the following methods:
   - `validateBlock()` - validate if the block has been tampered or not.
@@ -78,7 +78,7 @@ It contains a constructor and the following methods:
 
 #### Blockchain class
 
-This class will allow to implemente instamces of a blockchain. 
+This class will allow to implemente instance of a blockchain. 
 
 It contains a constructor and the following methods:
   - `createGenesisBlock()` - create the first block of the blockchain during the creation of the instance.
