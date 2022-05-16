@@ -36,21 +36,21 @@ This project is an implementation of a basic blockchain in nodeJS. It represents
 
 This application has been created using Node.js and javascript programming language. The architecture use ES6 classes.
 Some of the libraries or npm modules used:
-    - "bitcoinjs-lib": "^4.0.3",
-    - "bitcoinjs-message": "^2.0.0",
-    - "body-parser": "^1.18.3",
-    - "crypto-js": "^3.1.9-1",
-    - "express": "^4.16.4",
-    - "hex2ascii": "0.0.3",
-    - "morgan": "^1.9.1"
+    * "bitcoinjs-lib": "^4.0.3",
+    * "bitcoinjs-message": "^2.0.0",
+    * "body-parser": "^1.18.3",
+    * "crypto-js": "^3.1.9-1",
+    * "express": "^4.16.4",
+    * "hex2ascii": "0.0.3",
+    * "morgan": "^1.9.1"
 
 ### Libraries purpose:
 
-1. `bitcoinjs-lib` and `bitcoinjs-message`. Those libraries will help us to verify the wallet address ownership, we are going to use it to verify the signature.
-2. `express` The REST Api created for the purpose of this project it is being created using Express.js framework.
-3. `body-parser` this library will be used as middleware module for Express and will help us to read the json data submitted in a POST request.
-4. `crypto-js` This module contain some of the most important cryotographic methods and will help us to create the block hash.
-5. `hex2ascii` This library will help us to **decode** the data saved in the body of a Block.
+1. `bitcoinjs-lib` and `bitcoinjs-message`. Those libraries help to verify the wallet address ownership, it is used to verify the signature.
+2. `express` The REST Api is being created using Express.js framework.
+3. `body-parser` this library is used as middleware module for Express in order to read the json data submitted in a POST request.
+4. `crypto-js` This module contains some of the most important cryotographic methods and is used to create the block hash.
+5. `hex2ascii` This library is used to **decode** the data saved in the body of a Block.
 ---
 
 
@@ -64,16 +64,9 @@ It contains the configuration and initialization of the REST Api, the team who p
 
 It contains the routes of the REST Api. Those are the methods that expose the urls you will need to call when make a request to the application.
 
-### src folder 
+### Classes
 
-Folder where the main two classes needed to create our Blockchain application are present:  `block.js` file and a `blockchain.js` file that will contain the `Block` and `BlockChain` classes.
-
----
-
-
-## Classes
-
-### Block class
+#### Block class
 
 This class will allow to implemente instamces of a block. 
 
@@ -83,7 +76,7 @@ It contains a constructor and the following methods:
  
 ---
 
-## Blockchain class
+#### Blockchain class
 
 This class will allow to implemente instamces of a blockchain. 
 
@@ -104,7 +97,7 @@ It contains a constructor and the following methods:
 ## API calls
 
 |  Actions |  Route |  Request  |  body  |
-| ------------- |-------------| -----|
+| ------------- |-------------| -----| -------------  |
 |  Get Block by Height:       | /block/height/:height  | [POST]  |  -  |
 |  Get Block by Hash:       | /block/height/:hash  | [POST]  |  -  |
 |  Request OwnerShip:        | /requestValidation | [POST]  |  address  |
@@ -125,7 +118,7 @@ It contains a constructor and the following methods:
 
 ## To Do
 
-- test of endpoints,
+- test endpoints,
 - include eslint and prettier,
 - redone project using Typescript
 - ...
